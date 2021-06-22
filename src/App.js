@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNameAction, addPriceAction } from './index';
 import { addProductAction } from './store/productReducer';
 import { useState } from 'react';
 
@@ -22,58 +21,50 @@ function App() {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(price);
-    console.log(name);
     addProduct({ price, name });
   }
 
   return (
-    <div className="App">
-      <Form onSubmit={submit} >
-        <Form.Group controlId="formPrice">
-          <Form.Label >Price</Form.Label>
-          <Form.Control type="price" placeholder="Enter price of the product" value={price} onChange={(e) => setPrice(e.target.value)} />
-        </Form.Group>
+    <div className="row justify-content-center">
+      <div className="col-auto">
+        <Form className="text-center" style={{ width: "25rem" }} onSubmit={submit} >
+          <Form.Group controlId="formPrice">
+            <Form.Label style={{ fontWeight: "bold", fontSize: "1rem" }}>Price</Form.Label>
+            <Form.Control type="price" placeholder="Enter price of the product" value={price} onChange={(e) => setPrice(e.target.value)} />
+          </Form.Group>
 
-        <Form.Group controlId="formName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+          <Form.Group controlId="formName">
+            <Form.Label style={{ fontWeight: "bold", fontSize: "1rem" }}>Name</Form.Label>
+            <Form.Control type="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+          </Form.Group>
+          <Button style={{ marginBottom: "2rem" }} variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </Table>
+        <Table striped bordered hover style={{ width: "25rem" }}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          {products.length > 0 ?
+            <>
+              {products.map(product => {
+                return (
+                  <tr>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                  </tr>
+                )
+              })}
+            </>
+            : null
+          }
+        </Table>
 
+      </div>
     </div >
   );
 }

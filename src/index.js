@@ -5,14 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { Provider } from 'react-redux'
-
-import { createStore } from 'redux';
-
-import { rootReducer } from './store';
-
-
-const store = createStore(rootReducer);
+import { store } from './store';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <Provider store={store}>
